@@ -14,7 +14,6 @@
     <!-- Using Tailwind via CDN -->
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
 
-    <link href="styles.css" rel="stylesheet">
 
     <!-- https://v3.vuejs.org/guide/installation.html#release-notes -->
     <!-- Vue CDN -->
@@ -26,9 +25,17 @@
     <div id="app" class="max-w-xl mx-auto my-10 space-y-3">
 
         <h1 class="text-xl">Photo Gallery ( {{ countUndone }} )</h1>
+        <div id="search_bar">
+            <div id="input_text" v-show="search.toggle">
+                <input type="text" placeholder="Enter a new task ..."
+                    class="p-2 bg-white rounded flex-1 border-b-2 border-blue-300">
+            </div>
 
+            <button @click="toggleicon" v-show="search.cancel" class="material-icons">search</button>
+            <button @click="toggleicon" v-show="search.cancel == false">cancel</button>
+
+        </div>
         <ul>
-
             <li v-for="(task,index) in tasks" :class="{done: task.done}">
 
                 <span v-show="task.done">{{task.info}}</span>
