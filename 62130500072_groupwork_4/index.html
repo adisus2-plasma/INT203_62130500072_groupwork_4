@@ -27,13 +27,12 @@
         <h1 class="text-xl">Photo Gallery ( {{ countUndone }} )</h1>
         <div id="search_bar">
             <div id="input_text" v-show="search.toggle">
-                <input type="text" placeholder="Enter a new task ..."
+                <input type="text" v-model="index" @keyup.enter="inputMassage" placeholder="Enter a new task ..."
                     class="p-2 bg-white rounded flex-1 border-b-2 border-blue-300">
             </div>
 
             <button @click="toggleicon" v-show="search.cancel" class="material-icons">search</button>
             <button @click="toggleicon" v-show="search.cancel == false">cancel</button>
-
         </div>
         <ul>
             <li v-for="(task,index) in tasks" :class="{done: task.done}">

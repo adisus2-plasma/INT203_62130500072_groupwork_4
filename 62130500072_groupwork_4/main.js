@@ -5,7 +5,11 @@ const app = {
             { info: 'Empire state and the sunset', Image: './images/cityInSunset.jpg', done: false },
             { info: 'Street in small town', Image: './images/cityInNight.jpg', done: false }
             ],
-            search: { toggle: false, cancel: true}
+            search: { toggle: false, cancel: true },
+            index: "",
+            backup: [{ info: 'In the afternoon', Image: './images/cityInAfterNoon.jpg', done: false },
+            { info: 'Empire state and the sunset', Image: './images/cityInSunset.jpg', done: false },
+            { info: 'Street in small town', Image: './images/cityInNight.jpg', done: false }]
         }
     },
     methods: {
@@ -14,17 +18,25 @@ const app = {
         },
 
         toggleicon:
-        function () {
-            this.search.toggle = !this.search.toggle
-            this.search.cancel = !this.search.cancel
-            console.log(this.search.toggle);
-        },
+            function () {
+                this.search.toggle = !this.search.toggle
+                this.search.cancel = !this.search.cancel
+                console.log(this.search.toggle);
+                this.index = "";
+            }
 
-        
     },
     computed: {
         countUndone() {
             return this.tasks.filter(t => !t.done).length
+        },
+        inputMassage() {
+            this.tasks = this.backup
+            if (this.index) {
+                return this.tasks = this.tasks.filter(c => {
+                    return c.info.toLowerCase().includes(this.index.toLowerCase())
+                });
+            }
         }
     }
 }
