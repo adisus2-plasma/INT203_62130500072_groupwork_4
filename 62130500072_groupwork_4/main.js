@@ -9,12 +9,14 @@ const app = {
             index: "",
             backup: [{ info: 'In the afternoon', Image: './images/cityInAfterNoon.jpg', done: false },
             { info: 'Empire state and the sunset', Image: './images/cityInSunset.jpg', done: false },
-            { info: 'Street in small town', Image: './images/cityInNight.jpg', done: false }]
+            { info: 'Street in small town', Image: './images/cityInNight.jpg', done: false }],
+            invisible: true,
+            pathImage: ""
         }
     },
     methods: {
         toggleDone(index) {
-            this.tasks[index].done = !this.tasks[index].done
+            this.tasks[index].done = !this.tasks[index].done;
         },
 
         toggleicon:
@@ -23,7 +25,16 @@ const app = {
                 this.search.cancel = !this.search.cancel
                 console.log(this.search.toggle);
                 this.index = "";
-            }
+            },
+
+        togglePicture(position){
+            this.pathImage = position
+            this.invisible = false
+        },
+
+        quitCanvas(){
+            this.invisible = true
+        }
 
     },
     computed: {

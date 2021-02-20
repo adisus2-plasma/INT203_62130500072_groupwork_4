@@ -22,33 +22,35 @@
 </head>
 
 <body>
-    <div id="app" class="max-w-xl mx-auto my-10 space-y-3">
+    <div id="app" >
 
-        <h1 class="text-xl">Photo Gallery ( {{ countUndone }} )</h1>
-        <div id="search_bar">
-            <div id="input_text" v-show="search.toggle">
-                <input type="text" v-model="index" @keyup.enter="inputMassage" placeholder="Enter a new task ..."
-                    class="p-2 bg-white rounded flex-1 border-b-2 border-blue-300">
+        <div v-show="invisible" class=" flex flex-col justify-center w-2/6 mx-auto my-10">
+            
+            <h1 class="text-xl">Photo Gallery ( {{ countUndone }} )</h1>
+            <div id="search_bar">
+                <div id="input_text" v-show="search.toggle">
+                    <input type="text" v-model="index" @keyup.enter="inputMassage" placeholder="Enter a new task ..."
+                        class="p-2 bg-white rounded flex-1 border-b-2 border-blue-300">
+                </div>
+
+                <button @click="toggleicon" v-show="search.cancel" class="material-icons">search</button>
+                <button @click="toggleicon" v-show="search.cancel == false">cancel</button>
             </div>
+                <div v-for="(task,index) in tasks" >
 
-            <button @click="toggleicon" v-show="search.cancel" class="material-icons">search</button>
-            <button @click="toggleicon" v-show="search.cancel == false">cancel</button>
+                    <span >{{task.info}}</span>
+
+                        <img v-on:click="togglePicture(task.Image)" v-bind:src="task.Image" class="rounded-lg cursor-pointer w-40">
+                        <span v-show="task.done == false" class="material-icons cursor-pointer" v-on:click="toggleDone(index)">favorite_border</span>
+                        <span v-show="task.done == true" class="material-icons cursor-pointer"v-on:click="toggleDone(index)">favorite</span>
+
+                </div>
+
         </div>
-        <ul>
-            <li v-for="(task,index) in tasks" :class="{done: task.done}">
 
-                <span v-show="task.done">{{task.info}}</span>
-                <br>
-
-                <a href="#" v-on:click="toggleDone(index)">
-                    <img v-bind:src="task.Image" width="150" class="rounded-lg ">
-                    <span v-show="task.done == false" class="material-icons">favorite_border</span>
-                    <span v-show="task.done == true" class="material-icons">favorite</span>
-                    <br>
-            </li>
-
-        </ul>
-
+        <div class="bg-black w-full h-screen flex justify-center" v-show="!invisible">
+            <img v-bind:src="pathImage" v-on:click="quitCanvas" class="cursor-pointer">
+        </div>
     </div>
 
 
