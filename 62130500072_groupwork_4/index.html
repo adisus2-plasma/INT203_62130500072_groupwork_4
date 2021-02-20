@@ -30,18 +30,18 @@
             <div id="search_bar">
                 <div id="input_text" v-show="search.toggle">
                     <input type="text" v-model="index" @keyup.enter="inputMassage" placeholder="Enter a new task ..."
-                        class="p-2 bg-white rounded flex-1 border-b-2 border-blue-300">
+                        class="p-2 bg-white rounded flex-1 border-b-2 border-blue-300 ">
                 </div>
 
-                <button @click="toggleicon" v-show="search.cancel" class="material-icons">search</button>
-                <button @click="toggleicon" v-show="search.cancel == false">cancel</button>
+                <button @click="toggleicon" v-show="search.cancel" class="material-icons transition duration-150 transform hover:scale-125 motion-reduce:transform-none">search</button>
+                <button @click="toggleicon" v-show="search.cancel == false" class="transition duration-150 transform hover:scale-125 motion-reduce:transform-none">cancel</button>
             </div>
                 <div v-for="(task,index) in tasks" >
 
                     <span >{{task.info}}</span>
 
                         <img v-on:click="togglePicture(task.Image)" v-bind:src="task.Image" class="rounded-lg cursor-pointer w-40">
-                        <span v-show="task.done == false" class="material-icons cursor-pointer" v-on:click="toggleDone(index)">favorite_border</span>
+                        <span v-show="task.done == false" class="material-icons cursor-pointer transition duration-150 transform hover:scale-125 motion-reduce:transform-none" v-on:click="toggleDone(index)">favorite_border</span>
                         <span v-show="task.done == true" class="material-icons cursor-pointer"v-on:click="toggleDone(index)">favorite</span>
 
                 </div>
